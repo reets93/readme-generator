@@ -1,8 +1,8 @@
 const fs = require("fs");
-const path = require('path');
+// const path = require('path');
 const inquirer = require("inquirer");
 const generateMarkdown = require("./utils/generateMarkdown");
-const { generate } = require("rxjs");
+// const { generate } = require("rxjs");
 
 // array of questions for user
 // const questions = [
@@ -56,7 +56,7 @@ const questions = [
         message: 'Please write a short description of your project:'
     },
     {
-        type: 'checkbox',
+        type: 'list',
         name: 'license',
         message: 'What license are you using for your project?',
         choices: ['MIT', 'Apache License 2.0', 'GNU General Publice License v3.0', 'BSD 2-Clause "Simplified" License', 'Boost Software License', 'The Unlicense', 'Mozilla Public Licese 2.0']
@@ -87,12 +87,25 @@ const questions = [
 
 // function to write README file
 function writeToFile() {
+    const fileContent = `# ${data.title}`
+
+    fs.writeFile('sample.md', fileContent, (err) =>
+        err ? console.error(err) : console.log('Success'))
 }
+
+
+
 
 // function to initialize program
 function init() {
     inquirer
-    .prompt(questions).then((data) => console.log(data))
+        .prompt(questions).then((data) => {
+            console.log('answered')
+            const fileContent = `# ${data.title}`
+
+            fs.writeFile('sample.md', fileContent, (err) =>
+                err ? console.error(err) : console.log('Success'))
+        })
 }
 
 // function call to initialize program
