@@ -101,36 +101,54 @@ function init() {
     inquirer
         .prompt(questions).then((data) => {
             console.log('answered')
-            const fileContent = `# ${data.title}
-            ENTER LICENSE HERE
-            ## Description
-            ${data.description}
+const fileContent = `# ${data.title}
+ENTER LICENSE HERE
 
-            ## Table of Contents
-            ENTER LINKABLE THINGS HERE
+## Description
 
-            ## Installation
-            To install necessary depencies, run the following command:
-            ${data.installation}
+${data.description}
 
-            ## Usage
-            You can use this application by running " ${data.usage} "
 
-            ## License
-            This project is under the ${data.license} license.
+## Table of Contents
 
-            ## Contributing 
-            ${data.contributing}
+- [Installation](#installation)
+- [Usage](#usage)
+- [Credits](#credits)
+- [License](#license)
 
-            ## Tests 
-            To run tests, run the following command:
-            ${data.tests}
+## Installation
 
-            ## Questions
-            If you have any questions about the repo, open an issue or contact directly on ${data.email}.
-            To see more of my work, go to: 
-            [${data.username}](https://github.com/${data.username}/)
-            `
+To install necessary depencies, run the following command:
+> ${data.installation}
+
+
+## Usage
+
+You can use this application by running
+> ${data.usage}
+
+
+## License
+
+This project is under the **${data.license} license**.
+
+
+## Contributing 
+
+${data.contributing}
+
+
+## Tests 
+
+To run tests, run the following command:
+${data.tests}
+
+
+## Questions
+
+If you have any questions about the repo, open an issue or contact directly on ${data.email}.
+To see more of my work, go to: 
+[${data.username}](https://github.com/${data.username}/)`
 
             fs.writeFile('./Sample/README.md', fileContent, (err) =>
                 err ? console.error(err) : console.log('Success'))
