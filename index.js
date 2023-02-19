@@ -59,7 +59,7 @@ const questions = [
         type: 'list',
         name: 'license',
         message: 'What license are you using for your project?',
-        choices: ['MIT', 'Apache License 2.0', 'GNU General Publice License v3.0', 'BSD 2-Clause "Simplified" License', 'Boost Software License', 'The Unlicense', 'Mozilla Public Licese 2.0']
+        choices: ['MIT', 'Apache License 2.0',, 'BSD 2-Clause', 'Boost Software License', 'The Unlicense', 'Mozilla Public License 2.0']
     },
     {
         type: 'input',
@@ -97,12 +97,14 @@ const questions = [
 
 
 // function to initialize program
-function init() {
+function init() { 
     inquirer
         .prompt(questions).then((data) => {
+            const licenseType = data.license
             console.log('answered')
 const fileContent = `# ${data.title}
-ENTER LICENSE HERE
+
+${badge(data)}
 
 ## Description
 
@@ -160,14 +162,65 @@ init();
 
 
 // switch case for badge
-// function badge() { // --> how to get badge data in the right place
-//     const licenseType = ${data.license}
-//     switch (licenseType) {
+function badge(data) { // --> how to get badge data displaying and not undefined
+    const licenseType = data.license
+    if (licenseType == "MIT") {
+        return `[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)`
+    } else if (licenseType == "Apache License 2.0") {
+        return `[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)`
+    } else if (licenseType == "BSD 2-Clause"){
+        return `[![License](https://img.shields.io/badge/License-BSD_2--Clause-orange.svg)](https://opensource.org/licenses/BSD-2-Clause)`
+    } else if (licenseType == "Boost Software License"){
+        return `[![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)`
+    } else if (licenseType == "the Unlicense") {
+        return `[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)`
+    } else if (licenseType == "Mozilla Public License 2.0") {
+            return `[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)`
+    }
+
+// switch (licenseType) {
 //         case "MIT":
-//             " [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)";
+//             // MIT();
+//             `monkey`
+//             break;           
+//         case "Apache License 2.0":
+//             apache();   
 //             break;
+//         case "BSD 2-Clause":
+//             bsd();
+//             break;
+//         case "Boost Software License":
+//             boost();
+//             break;
+//         case "The Unlicense":
+//             unlicense();
+//             break;
+//         case "Mozilla Public License 2.0":
+//             mozilla();
+//             break;
+// }
+}
 
-//             'Apache License 2.0', 'GNU General Publice License v3.0', 'BSD 2-Clause "Simplified" License', 'Boost Software License', 'The Unlicense', 'Mozilla Public Licese 2.0']
+// function MIT() {
+//     return "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)"
+// }
 
-//     }
+// function apache(){
+//     return "[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)"
+// }
+
+// function bsd() {
+//     return `[![License](https://img.shields.io/badge/License-BSD_2--Clause-orange.svg)](https://opensource.org/licenses/BSD-2-Clause)`
+// }
+
+// function boost(){
+//     return `[![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)`
+// }
+
+// function unlicense(){
+//     return `[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)`
+// }
+
+// function mozilla(){
+//     return `[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)`
 // }
